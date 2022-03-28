@@ -184,14 +184,97 @@ np.random.seed(2)
 random.seed(1)
 plt.ion()
 engineers = []
+
+
+
+"""
+Below code of getting engineers 
+
+e.g - array([0, 1, 1, 1, 2])
+
+"""
 for i in range(service_centers):
     for j in range(random.randint(1, max_engi)):
         engineers.append(i)
 engineers = np.array(engineers)
 print('Engineers: {}'.format(engineers))
+
+"""
+Below code where distance is getting calculate 
+
+e.g - array([[0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.],
+       ...,
+       [0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 0.]])
+
+"""
+
 dist = np.zeros((atms_number+service_centers, atms_number))
 points_locations = np.random.randint(0, 100, (service_centers+atms_number)*2)
+
+"""
+Below line to calculate points locations 
+array([[40, 15],
+       [72, 22],
+       [43, 82],
+       [75,  7],
+       [34, 49],
+       [95, 75],
+       [85, 47],
+       [63, 31],
+       [90, 20],
+       [37, 39],
+       [67,  4],
+       [42, 51],
+       [38, 33],
+       [58, 67],
+       [69, 88],
+       [68, 46],
+       [70, 95],
+       [83, 31],
+       [66, 80],
+       [52, 76],
+       [50,  4],
+       [90, 63],
+       [79, 49],
+       [39, 46],
+       [ 8, 50],
+       [15,  8],
+       [17, 22],
+       [73, 57],
+       [90, 62],
+       [83, 96],
+       [43, 32],
+       [26,  8],
+       [76, 10],
+       [40, 34],
+       [60,  9],
+       [70, 86],
+       [70, 19],
+       [56, 82],
+       [ 1, 68],
+       [40, 81],
+       [61, 70],
+       [97, 18],
+       [84, 90],
+       [87, 22],
+       [43, 52],
+       [74, 72],
+       [90, 99],
+       [91, 96],
+       [16, 55],
+       [21, 43],
+       [93, 80],
+       [40, 70],
+       [74, 37]])
+
+"""
 points_locations = points_locations.reshape((service_centers+atms_number, 2))
+
+
 for i in range(dist.shape[0]):
     for j in range(dist.shape[1]):
         dist[i, j] = math.sqrt((points_locations[i, 0] - points_locations[j + service_centers, 0]) ** 2 +
@@ -199,6 +282,12 @@ for i in range(dist.shape[0]):
         if j+service_centers == i:
             dist[i][j] = 0
 # random population creation
+
+"""
+sample population array 
+[[[7, 32, 29, 33, 45, 25, 14, 6, 38], [28], [48, 0, 37, 21, 18, 9, 30, 2, 3, 1, 36, 31, 4, 23], [26, 47, 5, 40, 17, 39, 42], [46, 19, 34, 20, 35, 12, 49, 24, 15, 8
+, 41, 11, 13, 44, 22, 10, 43, 27, 16]], [[42, 12, 20, 19, 40, 34, 36, 28, 45, 2, 37, 17, 31, 33, 13, 30, 32], [44, 7, 39],....
+"""
 population = []
 for i in range(population_size):
     atms_range = list(range(atms_number))
@@ -217,6 +306,17 @@ for i in range(population_size):
                     pop[j].append(random.choice(atms_range))
                     atms_range.remove(pop[j][-1])
     population.append(pop)
+
+import pdb
+pdb.set_trace()
+"""
+fitness_result
+array([ 8.3610049 , 12.18254411,  8.18962019,  9.09406337,  9.83132276,
+        9.49915485, 12.16496874,  9.77793808,  8.93768375,  6.92068589,
+       11.17080457, 11.01275734, 11.41729378,  9.48986852,  8.53881809,
+        5.9080962 , 10.59011395,  8.63676556, 10.45126391,  9.56184227,....
+
+"""
 fitness_result = fitness_pop(population)
 best_mean_creature_result = np.mean(fitness_result)
 best_creature_result = np.min(fitness_result)
