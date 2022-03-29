@@ -2,6 +2,7 @@ import numpy as np
 import random
 import math
 import matplotlib.pyplot as plt
+
 '''
 Genetical path finding
 Finds locally best ways from L service centers with [M0, M1, ..., ML] engineers
