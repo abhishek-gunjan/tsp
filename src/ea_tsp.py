@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib as plt
 import random
 
+
 class AgentInfo:
     """
     AgentInfo defines necessary information about the agent.
@@ -32,6 +33,7 @@ class AgentInfo:
     def get_current_city(self) -> str:
         """ Return the current city of the agent """
         return self.current_city
+
 
 class ServicePointInfo:
     """
@@ -57,6 +59,7 @@ class ServicePointInfo:
         """ Returns the pincode of the service points """
         return self.pincode
 
+
 class EA_TSP:
     # Bank parameters
     atms_number = 50  # ATM quantity
@@ -80,3 +83,4 @@ class EA_TSP:
     engineers = []
 
     def __init__(self, service_points: list, agent_loc: dict, ):
+        pass
