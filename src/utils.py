@@ -7,7 +7,8 @@ __status__ = "Development"
 
 import pandas as pd
 
-#file_name = "data/Scheduling_28_March_updated.xlsx"
+
+# file_name = "data/mstp_data.xlsx"
 
 @staticmethod
 def fetch_service_points(sp_file_path: str) -> list:
@@ -21,10 +22,9 @@ def fetch_service_points(sp_file_path: str) -> list:
     dfs = pd.ExcelFile(sp_file_path)
     service_points_data = dfs.parse('Leads')
     """
-    ['Patna', 'Mumbai', 'Iduvai', 'Sriganganagar', 'NASHIK',
-       'Aligarh', 'Vadodara', 'Dehradun', 'Hyderabad']
+    [{'Billing City': 'outlier', 'Address': '505, Avinashi - Tiruppur Rd, Ram Nagar, Tiruppur, Tamil Nadu 641602', 'Pin': 641602.0}]
     """
-    return service_points_data['Billing City'].unique()
+    return service_points_data[['Billing City', 'Address', 'Pin']].to_dict(orient='records')
 
 
 @staticmethod
@@ -39,7 +39,8 @@ def fetch_agent_info(agent_file_path: str) -> list:
     agent_info_data = dfs.parse('Agent Availability')
 
     """
-    [{'Agent Name': 'Sabari', 'Next Date': Timestamp('2022-03-30 00:00:00'), 'Circuit': 'Hyderabad Circuit', 'Start City': 'Hyderabad'}, {'Agent Name': 'Anubhav',
+    [{'Base City': 'Hyderabad', 'Start City': 'Hyderabad'}, {'Base City': 'Delhi', 'Start City': 'Delhi'}]e
     """
-    return agent_info_data.to_dict(orient='records')
+    return agent_info_data[['Base City', 'Start City']].to_dict(orient='records')
+
 
